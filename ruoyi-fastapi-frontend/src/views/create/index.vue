@@ -1,54 +1,57 @@
 <template>
   <div>
-    <el-input v-model="input" style="width: 240px" placeholder="Job id" />
+    <el-divider><h1>Basic Information</h1></el-divider>
+  </div>
+  <div id="main">
+    <el-card style="width: 480px; height: 1000px; margin: 20px">
+      <template #header>
+        <div class="card-header">
+          <span>Setp 1 - Select Client</span>
+        </div>
+      </template>
+        <div class="client">
+          <ClientForm />
+        </div>
+    </el-card>
+    <el-card style="width: 560px; height: 1000px; margin: 20px">
+      <template #header>
+        <div class="card-header">
+          <span>Setp 2 - Upload Files</span>
+        </div>
+      </template>
+      <div class="client">
+        <FileUpload />
+      </div>
+    </el-card>
+    <el-card style="width: 1200px; height: 1000px; margin: 20px">
+      <template #header>
+        <div class="card-header">
+          <span>Setp 3 - Quotation</span>
+        </div>
+      </template>
+      <div class="client">
+        <Quotation />
+      </div>
+    </el-card>
   </div>
 
-  <div class="select">
-    <p>Client</p>
-    <el-select
-        v-model="value"
-        clearable
-        placeholder="Select"
-        style="width: 240px"
-    >
-      <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-      />
-    </el-select>
-  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
-const value = ref('')
-const options = [
-  {
-    value: 'Option1',
-    label: 'Option1',
-  },
-  {
-    value: 'Option2',
-    label: 'Option2',
-  },
-  {
-    value: 'Option3',
-    label: 'Option3',
-  },
-  {
-    value: 'Option4',
-    label: 'Option4',
-  },
-  {
-    value: 'Option5',
-    label: 'Option5',
-  },
-]
+import ClientForm from './client_form.vue'
+import FileUpload from './upload.vue'
+import Quotation from './quotation.vue'
 </script>
 
 <style scoped lang="scss">
+.client {
+  padding: 20px;
+}
+#main
+{
+  display: flex;
+  justify-content: center;
+}
 
 </style>

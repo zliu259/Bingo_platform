@@ -2,6 +2,7 @@
   <div class="upload-file">
     <el-upload
       multiple
+      drag
       :action="uploadFileUrl"
       :before-upload="handleBeforeUpload"
       :file-list="fileList"
@@ -15,9 +16,15 @@
       ref="fileUpload"
     >
       <!-- 上传按钮 -->
-      <el-button type="primary">选取文件</el-button>
+      <el-button type="primary" size="large">Select files<br>选取文件</el-button>
     </el-upload>
     <!-- 上传提示 -->
+    <div class="el-upload__tip" v-if="showTip">
+      Please upload
+      <template v-if="fileSize"> files up to <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
+      <template v-if="fileType"> in <b style="color: #f56c6c">{{ fileType.join("/") }}</b> </template>
+      format
+    </div>
     <div class="el-upload__tip" v-if="showTip">
       请上传
       <template v-if="fileSize"> 大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
@@ -46,17 +53,17 @@ const props = defineProps({
   // 数量限制
   limit: {
     type: Number,
-    default: 5,
+    default: 10,
   },
   // 大小限制(MB)
   fileSize: {
     type: Number,
-    default: 5,
+    default: 100,
   },
   // 文件类型, 例如['png', 'jpg', 'jpeg']
   fileType: {
     type: Array,
-    default: () => ["doc", "xls", "ppt", "txt", "pdf"],
+    default: () => ["doc", "xls", "ppt", "txt", "pdf", "png", "jpg", "jpeg"],
   },
   // 是否显示提示
   isShowTip: {

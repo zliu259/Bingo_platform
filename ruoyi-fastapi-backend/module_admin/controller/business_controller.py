@@ -49,8 +49,10 @@ async def update_client(data:Client):
     db = ClientDatabase()
     db.update_client(data.client_id, data.dict())
     return {"code": 200}
+
 class ClientId(BaseModel):
     id: str
+
 @businessController.post("/delete_clients", summary="删除客户")
 async def delete_client(client_id:ClientId):
     db = ClientDatabase()

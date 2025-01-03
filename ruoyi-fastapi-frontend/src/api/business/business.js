@@ -30,3 +30,10 @@ export function deleteClient(data) {
     })
 }
 
+export function updateClient(data) {
+    return request({
+        url: '/business/update_clients',
+        method: 'post',
+        data: data
+    })
+}
