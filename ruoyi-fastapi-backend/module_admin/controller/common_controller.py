@@ -9,6 +9,7 @@ commonController = APIRouter(prefix='/common', dependencies=[Depends(LoginServic
 
 @commonController.post('/upload')
 async def common_upload(request: Request, file: UploadFile = File(...)):
+
     upload_result = await CommonService.upload_service(request, file)
     logger.info('上传成功')
 

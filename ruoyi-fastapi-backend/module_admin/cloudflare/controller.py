@@ -8,7 +8,7 @@ import pandas as pd
 
 class ProjectDatabase:
     def __init__(self):
-        os.environ['CLOUDFLARE_API_TOKEN'] = 'ufOzuXUzIq8QSy8QjFaKNBR706XmIie_mucZFtz1'
+        os.environ['CLOUDFLARE_API_TOKEN'] = 'lwr3p3kZZ5JnPVWUrCTtw1saiS5aQ-sx7Pt8pmM4'
         self.client = Cloudflare(api_token=os.environ.get("CLOUDFLARE_API_TOKEN"))
         self.account_id = '78939a17148c390144ef58e10a619393'
         self.database_id = '80bcc84b-4b11-4c12-bd9e-523f3f5ff26a'
@@ -53,7 +53,7 @@ class ProjectDatabase:
 
 class ClientDatabase:
     def __init__(self):
-        os.environ['CLOUDFLARE_API_TOKEN'] = 'ufOzuXUzIq8QSy8QjFaKNBR706XmIie_mucZFtz1'
+        os.environ['CLOUDFLARE_API_TOKEN'] = 'lwr3p3kZZ5JnPVWUrCTtw1saiS5aQ-sx7Pt8pmM4'
         self.client = Cloudflare(api_token=os.environ.get("CLOUDFLARE_API_TOKEN"))
         self.account_id = '78939a17148c390144ef58e10a619393'
         self.database_id = '80bcc84b-4b11-4c12-bd9e-523f3f5ff26a'

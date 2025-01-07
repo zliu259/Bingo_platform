@@ -24,7 +24,7 @@ class CommonService:
         if not UploadUtil.check_file_extension(file):
             raise ServiceException(message='文件类型不合法')
         else:
-            relative_path = f'upload/{datetime.now().strftime("%Y")}/{datetime.now().strftime("%m")}/{datetime.now().strftime("%d")}'
+            relative_path = f'upload'
             dir_path = os.path.join(UploadConfig.UPLOAD_PATH, relative_path)
             try:
                 os.makedirs(dir_path)
