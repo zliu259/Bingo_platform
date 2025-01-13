@@ -2,6 +2,7 @@
 
   <el-row :gutter="20">
     <el-col :span="16"><div class="grid-content ep-bg-purple" />
+
       <div class="table">
         <Table/>
       </div>
@@ -9,7 +10,7 @@
     <el-col :span="8"><div class="grid-content ep-bg-purple" />
       <div class = "form">
         <h1>Create New Client</h1>
-        <Form/>
+        <Form/>s
       </div>
     </el-col>
   </el-row>
@@ -19,6 +20,7 @@
 import { ref } from 'vue'
 import Table from './table.vue'
 import Form from './form.vue'
+import Upload from './upload.vue'
 </script>
 <style>
 .table {

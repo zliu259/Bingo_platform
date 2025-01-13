@@ -27,4 +27,4 @@ file_path = r'C:\Users\liuzi\PycharmProjects\Bingo_platform\ruoyi-fastapi-backen
 # 存储桶里的路径和文件名 此处可以重新命名上传后的文件名称，也可以添加文件夹
 bucket_file_name = 'Screenshot 2024-12-16 at 23.25.24_20250107120156A360.png'
 # 使用 S3 客户端上传文件
-s3_client.upload_file(file_path, bucket_name, bucket_file_name)
+s3_client.upload_file(file_path, bucket_name, bucket_file_name)444
