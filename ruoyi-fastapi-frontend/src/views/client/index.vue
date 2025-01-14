@@ -10,7 +10,7 @@
     <el-col :span="8"><div class="grid-content ep-bg-purple" />
       <div class = "form">
         <h1>Create New Client</h1>
-        <Form/>s
+        <Form/>
       </div>
     </el-col>
   </el-row>

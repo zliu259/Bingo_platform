@@ -37,3 +37,32 @@ export function updateClient(data) {
         data: data
     })
 }
+// Provider api
+export function getProviderList() {
+  return request({
+    url: '/business/providers',
+    method: 'get',
+  })
+}
+export function createProvider(data) {
+    return request({
+        url: '/business/add_providers',
+        method: 'post',
+        data: data
+    })
+}
+
+// Quotation api
+export function getQuotationList() {
+  return request({
+    url: '/business/quotations',
+    method: 'get',
+  })
+}
+export function createQuotation(data) {
+    return request({
+        url: '/business/add_quotations',
+        method: 'post',
+        data: data
+    })
+}
