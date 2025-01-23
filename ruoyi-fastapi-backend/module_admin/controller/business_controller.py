@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi import APIRouter, File, UploadFile, HTTPException
-from module_admin.cloudflare.controller import ProjectDatabase, ClientDatabase, CfDatabase
+from module_admin.cloudflare.controller import  CfDatabase
 from pydantic import BaseModel
 
 
@@ -10,6 +10,20 @@ businessController = APIRouter(prefix='/business', tags=['业务模块'])
 @businessController.get("/test", summary="测试API")
 async def test_api():
     return {"message": "Hello, World!"}
+
+#Member
+class Member(BaseModel):
+    id: str
+    name: str
+    active: int
+
+@businessController.get("/members", summary="获取完整成员列表")
+async def get_all_members():
+    db = CfDatabase()
+    members = db.list_all_members()
+    print(members)
+    return members
+
 
 @businessController.get("/projects", summary="获取完整项目列表")
 async def get_all_projects():
@@ -35,26 +49,26 @@ class ClientId(BaseModel):
 
 @businessController.get("/clients", summary="获取完整客户列表")
 async def get_all_clients():
-    db = ClientDatabase()
+    db = CfDatabase()
     clients = db.list_all_clients()
     print(clients)
     return clients
 
 @businessController.post("/add_clients", summary="添加新客户")
 async def add_client(data:Client):
-    db = ClientDatabase()
+    db = CfDatabase()
     db.insert_client([data.dict()])
     return {"code": 200}
 
 @businessController.post("/update_clients", summary="更新客户信息")
 async def update_client(data:Client):
-    db = ClientDatabase()
+    db = CfDatabase()
     db.update_client(data.client_id, data.dict())
     return {"code": 200}
 
 @businessController.post("/delete_clients", summary="删除客户")
 async def delete_client(client_id:ClientId):
-    db = ClientDatabase()
+    db = CfDatabase()
     db.delete_client(client_id.id)
     return {"code": 200}
 
@@ -112,3 +126,28 @@ async def add_quotation(data:Quotation):
     db = CfDatabase()
     db.insert_quotation([data.dict()])
     return {"code": 200, "message": "Quotation added successfully"}
+
+#Task
+class Task(BaseModel):
+    id: str
+    project_id: str
+    user: str
+    created_by: str
+    instruction: str
+    status: int
+    active: int
+    type: int
+    due:int
+
+@businessController.get("/tasks", summary="获取完整任务列表")
+async def get_all_tasks():
+    db = CfDatabase()
+    tasks = db.list_all_tasks()
+    print(tasks)
+    return tasks
+
+@businessController.post("/add_tasks", summary="添加新任务")
+async def add_task(data:Task):
+    db = CfDatabase()
+    db.insert_task([data.dict()])
+    return {"code": 200, "message": "Task added successfully"}

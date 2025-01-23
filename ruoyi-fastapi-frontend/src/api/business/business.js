@@ -1,4 +1,11 @@
 import request from '@/utils/request'
+// Member api
+export function getMemberList() {
+    return request({
+        url: '/business/members',
+        method: 'get',
+    })
+}
 
 // project api
 export function getProjectList() {
@@ -62,6 +69,28 @@ export function getQuotationList() {
 export function createQuotation(data) {
     return request({
         url: '/business/add_quotations',
+        method: 'post',
+        data: data
+    })
+}
+
+// Task api
+export function getTaskList() {
+  return request({
+    url: '/business/tasks',
+    method: 'get',
+  })
+}
+export function createTask(data) {
+    return request({
+        url: '/business/add_tasks',
+        method: 'post',
+        data: data
+    })
+}
+export function updateTask(data) {
+    return request({
+        url: '/business/update_tasks',
         method: 'post',
         data: data
     })
