@@ -3,7 +3,7 @@
     <el-form @submit.prevent="submitForm" :model="newTask" label-position="top">
       <p>{{newTask.id}}</p>
       <el-form-item label="Project ID">
-        <el-select v-model="newTask.project_id" placeholder="Select Project" required>
+        <el-select v-model="newTask.project_id" placeholder="Select Project">
           <el-option
             v-for="project in projects"
             :key="project.id"
@@ -13,13 +13,13 @@
         </el-select>
       </el-form-item>
       <el-form-item label="User">
-        <el-select v-model="newTask.user" placeholder="Select User" required>
+        <el-select v-model="newTask.user" placeholder="请选择用户">
           <el-option
-            v-for="user in users.value"
-            :key="user.id"
-            :label="user.name"
-            :value="user.id"
-          ></el-option>
+            v-for="user in users"
+            :key="user.userId"
+            :label="user.userName"
+            :value="user.userId"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="Created By">
@@ -29,7 +29,7 @@
         <el-input type="textarea" v-model="newTask.instruction" required></el-input>
       </el-form-item>
       <el-form-item label="Type">
-        <el-select v-model="newTask.type" placeholder="Select Type" required>
+        <el-select v-model="newTask.type" placeholder="Select Type">
           <el-option label="Translating" :value="0"></el-option>
           <el-option label="Interpreting" :value="1"></el-option>
           <el-option label="Quoting/Estimating" :value="2"></el-option>
@@ -61,6 +61,7 @@ import Uploader from './upload.vue';
 const tasks = ref([]);
 const projects = ref([]);
 const users = ref([]);
+const dataLoaded = ref(false);
 const newTask = ref({
   id: uuidv7(),
   project_id: '',
@@ -91,12 +92,25 @@ const timeDifference = computed(() => {
 });
 
 onMounted(async () => {
-  const userResponse = await getMemberList();
-  users.value = userResponse.data;
+  try {
+    const userResponse = await getMemberList();
+    // 确保数据格式正确
+    if (userResponse.data && Array.isArray(userResponse.data)) {
+      users.value = userResponse.data;
+    } else {
+      console.error('Invalid user data format:', userResponse);
+      ElMessage.error('获取用户列表失败');
+    }
+    // ...其他数据加载
+  } catch (error) {
+    console.error('Failed to load users:', error);
+    ElMessage.error('获取用户列表失败');
+  }
   const taskResponse = await getTaskList();
   tasks.value = taskResponse.data;
   const projectResponse = await getQuotationList();
   projects.value = projectResponse.data;
+  dataLoaded.value = true;
 });
 
 const submitForm = async () => {

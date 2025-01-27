@@ -27,7 +27,7 @@ async def get_all_members():
 
 @businessController.get("/projects", summary="获取完整项目列表")
 async def get_all_projects():
-    db = ProjectDatabase()
+    db = CfDatabase()
     projects = db.list_all_projects()
     print(projects)
     return projects

@@ -134,7 +134,7 @@ class CfDatabase:
 
     #Member
     def list_all_members(self):
-        sql = "SELECT * FROM member"
+        sql = "SELECT * FROM member WHERE active = 1"
         query_result = self.client.d1.database.query(
             database_id=self.database_id,
             account_id=self.account_id,
